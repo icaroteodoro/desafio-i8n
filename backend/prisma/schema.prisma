@@ -12,8 +12,29 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  email    String @unique
+  email    String  @unique
   password String
+  Order    Order[]
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  unitPrice  Decimal
+  totalPrice Decimal
+  createAt   DateTime @default(now())
+  order      Order    @relation(fields: [orderId], references: [id])
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  userId    String
+  code      Int
+  ItemOrder OrderItem[]
+
+  user User @relation(fields: [userId], references: [id])
 }
