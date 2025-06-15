@@ -58,7 +58,7 @@ export class AuthService {
 
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_ACCESS_SECRET,
-      expiresIn: '2h',
+      expiresIn: '30m',
     });
 
     const refreshToken = await this.jwtService.signAsync(payload, {
@@ -70,5 +70,13 @@ export class AuthService {
       accessToken,
       refreshToken,
     };
+  }
+
+  //PARA TESTE
+  async getUser(email: string){
+    const response = await this.userService.findUserByEmail(email);
+    if(!response) throw new NotFoundException('User not found')
+    const {password, ...rest} = response;
+    return rest;
   }
 }
