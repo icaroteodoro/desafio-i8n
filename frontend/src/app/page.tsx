@@ -1,9 +1,19 @@
+'use client'
 import CardProduct from "@/components/card-product";
 import { getAllProducts } from "@/services/product-service";
-import { use } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const products = use(getAllProducts());
+  const [products, setProducts] = useState([]);
+
+  const mount = async () => {
+    const res = await getAllProducts();
+    setProducts(res);
+  }
+
+  useEffect(() => {
+    mount();
+  }, []);
   
   return (
     <section className="pt-30 container mx-auto grid grid-cols-5 gap-16">
