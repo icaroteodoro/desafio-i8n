@@ -21,6 +21,7 @@ model User {
 
 model OrderItem {
   id         String   @id @default(uuid())
+  name       String
   orderId    String
   productId  String
   quantity   Int
@@ -31,10 +32,11 @@ model OrderItem {
 }
 
 model Order {
-  id        String      @id @default(uuid())
-  userId    String
-  code      Int
-  ItemOrder OrderItem[]
+  id         String      @id @default(uuid())
+  userId     String
+  code       Int
+  totalPrice Decimal
+  orderItems OrderItem[]
 
   user User @relation(fields: [userId], references: [id])
 }
