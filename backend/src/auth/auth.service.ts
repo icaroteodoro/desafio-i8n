@@ -1,5 +1,5 @@
 import {
-    BadRequestException,
+  BadRequestException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -22,7 +22,10 @@ export class AuthService {
   async signIn(loginUser: LoginDTO) {
     const user = await this.userService.findUserByEmail(loginUser.email);
     if (!user) throw new NotFoundException('User not found');
-    const passwordMatch = await bcrypt.compare(loginUser.password, user.password);
+    const passwordMatch = await bcrypt.compare(
+      loginUser.password,
+      user.password,
+    );
     if (!passwordMatch) throw new UnauthorizedException('Invalid credentials');
 
     const payload = { sub: user.id, email: user.email };
@@ -45,7 +48,7 @@ export class AuthService {
 
   async signUp(user: RegisterDTO) {
     const userExists = await this.userService.findUserByEmail(user.email);
-    if(userExists) throw new BadRequestException('User already exists');
+    if (userExists) throw new BadRequestException('User already exists');
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(user.password, salt);
@@ -75,11 +78,39 @@ export class AuthService {
     };
   }
 
+  async refreshToken(refreshToken: string) {
+    const payload = await this.jwtService.verifyAsync(refreshToken, {
+      secret: process.env.JWT_REFRESH_SECRET,
+    });
+    const userEmail = payload.email;
+
+    const user = await this.userService.findUserByEmail(userEmail);
+    if (!user) throw new NotFoundException('User not found');
+
+    const newPayload = { sub: user.id, email: user.email };
+
+    const newAccessToken = await this.jwtService.signAsync(newPayload, {
+      secret: process.env.JWT_ACCESS_SECRET,
+      expiresIn: '30m',
+    });
+
+    const newRefreshToken = await this.jwtService.signAsync(newPayload, {
+      secret: process.env.JWT_REFRESH_SECRET,
+      expiresIn: '7d',
+    });
+
+    return {
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    };
+
+  }
+
   //PARA TESTE
-  async getUser(email: string){
+  async getUser(email: string) {
     const response = await this.userService.findUserByEmail(email);
-    if(!response) throw new NotFoundException('User not found')
-    const {password, ...rest} = response;
+    if (!response) throw new NotFoundException('User not found');
+    const { password, ...rest } = response;
     return rest;
   }
 }

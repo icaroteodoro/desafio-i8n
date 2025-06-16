@@ -20,6 +20,12 @@ export class AuthController {
     async login(@Body() loginUser: LoginDTO) {
         return this.authService.signIn(loginUser);
     }
+    @Post('refresh-token')
+    @HttpCode(HttpStatus.OK)
+    async refreshToken(@Body() data: {refreshToken: string}) {
+        return this.authService.refreshToken(data.refreshToken);
+    }
+
 
     @Get('user')
     @HttpCode(HttpStatus.OK)
