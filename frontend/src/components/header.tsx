@@ -1,4 +1,6 @@
 import CartDropdown from "./cart-dropdown";
+import ProfileDropdown from "./profile-dropdown";
+import { Input } from "./ui/input";
 
 export default function Header() {
   return (
@@ -7,6 +9,7 @@ export default function Header() {
         <h1 className="text-3xl font-semibold">Minha Loja</h1>
         <div className="flex gap-5">
             <CartDropdown/>
+            <ProfileDropdown/>
         </div>
       </div>
     </nav>
