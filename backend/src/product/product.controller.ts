@@ -13,13 +13,22 @@ import { ProductService } from './product.service';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Get()
-  findAll() {
-    return this.productService.findAll();
+  @Get("brazilian")
+  findAllBrazilian() {
+    return this.productService.findAllBrazilan();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.productService.findOne(id);
+  @Get('brazilian/:id')
+  findOneBrazilian(@Param('id') id: number) {
+    return this.productService.findOneBrazilian(id);
+  }
+  @Get("european")
+  findAllEuropean() {
+    return this.productService.findAllEuropean();
+  }
+
+  @Get('european/:id')
+  findOneEuropean(@Param('id') id: number) {
+    return this.productService.findOneEuropean(id);
   }
 }
