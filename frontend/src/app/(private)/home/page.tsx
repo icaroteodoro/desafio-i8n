@@ -153,7 +153,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex gap-5">
-        <div className="w-2/12 pb-16 border rounded-md p-5">
+        <div className="w-2/12 h-max mb-10 pb-16 border rounded-md p-5">
           <h2 className="text-md font-semibold">Categorias</h2>
           <div className="flex flex-col gap-2 pt-4">
             {!categories
