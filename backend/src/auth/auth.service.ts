@@ -30,7 +30,7 @@ export class AuthService {
 
     const payload = { sub: user.id, email: user.email };
 
-    const accessToken = await this.jwtService.signAsync(payload, {
+    const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_ACCESS_SECRET,
       expiresIn: '2h',
     });
@@ -41,7 +41,7 @@ export class AuthService {
     });
 
     return {
-      accessToken,
+      token,
       refreshToken,
     };
   }
@@ -62,7 +62,7 @@ export class AuthService {
 
     const payload = { sub: createdUser.id, email: createdUser.email };
 
-    const accessToken = await this.jwtService.signAsync(payload, {
+    const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_ACCESS_SECRET,
       expiresIn: '30m',
     });
@@ -73,7 +73,7 @@ export class AuthService {
     });
 
     return {
-      accessToken,
+      token,
       refreshToken,
     };
   }
@@ -89,7 +89,7 @@ export class AuthService {
 
     const newPayload = { sub: user.id, email: user.email };
 
-    const newAccessToken = await this.jwtService.signAsync(newPayload, {
+    const newToken = await this.jwtService.signAsync(newPayload, {
       secret: process.env.JWT_ACCESS_SECRET,
       expiresIn: '30m',
     });
@@ -100,7 +100,7 @@ export class AuthService {
     });
 
     return {
-      accessToken: newAccessToken,
+      token: newToken,
       refreshToken: newRefreshToken,
     };
 
