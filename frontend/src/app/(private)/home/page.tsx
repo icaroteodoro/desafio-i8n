@@ -102,19 +102,19 @@ export default function Home() {
     }
 
     if (minPrice !== 0) {
-      filteredProducts = filteredProducts.filter(product => product.price >= minPrice);
+      filteredProducts = filteredProducts.filter(product => product.finalPrice >= minPrice);
     }
 
     if (maxPrice !== 0) {
-      filteredProducts = filteredProducts.filter(product => product.price <= maxPrice);
+      filteredProducts = filteredProducts.filter(product => product.finalPrice <= maxPrice);
     }
 
     if (sortOption === "minor-price") {
-      filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price);
+      filteredProducts = [...filteredProducts].sort((a, b) => a.finalPrice - b.finalPrice);
     }
 
     if (sortOption === "major-price") {
-      filteredProducts = [...filteredProducts].sort((a, b) => b.price - a.price);
+      filteredProducts = [...filteredProducts].sort((a, b) => b.finalPrice - a.finalPrice);
     }
 
     setProducts(filteredProducts);
