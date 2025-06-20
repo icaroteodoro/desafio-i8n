@@ -121,16 +121,16 @@ export default function Home() {
   }, [selectedCategories, selectedMaterials, search, sortOption, minPrice, maxPrice, allProducts]);
 
   return (
-    <section className="pt-30  container mx-auto">
+    <section className="pt-30 container mx-auto">
       <div className="pb-20 flex justify-end gap-20">
         <div>
           <label>Pesquisar pelo nome:</label>
-          <Input onChange={(e) => setSearch(e.target.value)} className="w-72" />
+          <Input onChange={(e) => setSearch(e.target.value)} className="w-72 bg-white" />
         </div>
         <div>
           <label>Ordenar por:</label>
           <Select value={sortOption} onValueChange={(value) => setSortOption(value)}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] bg-white">
               <SelectValue placeholder="---" />
             </SelectTrigger>
             <SelectContent>
@@ -144,8 +144,8 @@ export default function Home() {
           <label>Filtrar por preço:</label>
           <div className="flex flex-col">
               <div className="flex gap-5">
-                <Input type="number" onChange={e => toggleMinPrice(e.target.value ? parseFloat(e.target.value) : 0)} placeholder="Preço Min." />
-                <Input type="number" onChange={e => toggleMaxPrice(e.target.value ? parseFloat(e.target.value) : 0)} placeholder="Preço Max." />
+                <Input className="bg-white" type="number" onChange={e => toggleMinPrice(e.target.value ? parseFloat(e.target.value) : 0)} placeholder="Preço Min." />
+                <Input className="bg-white" type="number" onChange={e => toggleMaxPrice(e.target.value ? parseFloat(e.target.value) : 0)} placeholder="Preço Max." />
               </div>
               {!errorMinPrice ? '' : <span className="text-red-500">{errorMinPrice}</span>}
               {!errorMaxPrice ? '' : <span className="text-red-500">{errorMaxPrice}</span>}
@@ -153,7 +153,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex gap-5">
-        <div className="w-2/12 h-max mb-10 pb-16 border rounded-md p-5">
+        <div className="w-2/12 h-max mb-10 pb-16 border rounded-md p-5 bg-white">
           <h2 className="text-md font-semibold">Categorias</h2>
           <div className="flex flex-col gap-2 pt-4">
             {!categories
