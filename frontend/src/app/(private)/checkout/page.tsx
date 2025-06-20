@@ -39,7 +39,7 @@ export default function Checkout() {
             className: "text-green-700"
         });
         clearCart();
-        window.location.href = '/home';
+        window.location.href = '/thanks';
     }catch(err) {
         toast("Não foi possível finalizar a compra", {
             icon: <CircleX className="text-red-700"/>,
