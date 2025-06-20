@@ -12,6 +12,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useCart } from "@/context/cartContext";
+import Link from "next/link";
 
 function formatarParaReal(valor: string): string {
   const price = parseFloat(valor);
@@ -24,7 +25,7 @@ function formatarParaReal(valor: string): string {
 export default function CartDropdown() {
   const [openDropdown, setOpenDropdown] = useState(false);
 
-  const {cart: cartProducts ,addQuantity, getTotalPrice, removeQuantity} = useCart();
+  const {cart: cartProducts ,addQuantity, getTotalPrice, removeQuantity, getTotalItems} = useCart();
 
 
   const handleAddQuantity = (e: React.MouseEvent, productId: string) => {
@@ -76,6 +77,11 @@ export default function CartDropdown() {
               <p className="font-semibold">Total:</p>
               <p>{formatarParaReal(getTotalPrice().toString())}</p>
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            {
+              getTotalItems() === 0 ? '' : 
+              <Link onClick={() => setOpenDropdown(false)} className="flex justify-center py-2 rounded-sm bg-green-600 text-white" href="/checkout">Finalizar compra</Link>
+            }
       </DropdownMenuContent>
     </DropdownMenu>
   );
