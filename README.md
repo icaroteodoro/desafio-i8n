@@ -12,6 +12,15 @@ Este projeto consiste em uma aplicação web com backend em Node.js e frontend e
 
 ---
 
+### ✅ Clone o repositório:
+
+```bash
+git clone https://github.com/icaroteodoro/desafio-in8.git
+cd desafio-in8
+```
+
+---
+
 ### ✅ Rodando o Backend:
 
 1. Abra um terminal
