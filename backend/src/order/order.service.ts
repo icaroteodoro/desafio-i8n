@@ -25,6 +25,7 @@ export class OrderService {
           create: data.items.map((item) => ({
             name: item.name,
             productId: item.productId,
+            imageUrl: item.imageUrl,
             quantity: item.quantity,
             unitPrice: item.unitPrice,
             totalPrice: item.unitPrice * item.quantity,
@@ -60,6 +61,9 @@ export class OrderService {
       where: {
         id,
       },
+      include: {
+        orderItems: true
+      }
     });
   }
 
