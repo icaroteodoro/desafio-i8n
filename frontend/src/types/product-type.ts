@@ -56,3 +56,10 @@ type CartProduct = {
   totalPrice: number,
   imageUrl: string,
 };
+
+type CreateOrderItemDto = {
+    name: string;
+    productId: string;
+    quantity: number;
+    unitPrice: number;
+}
