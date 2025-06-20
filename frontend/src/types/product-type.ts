@@ -60,6 +60,7 @@ type CartProduct = {
 type CreateOrderItemDto = {
     name: string;
     productId: string;
+    imageUrl: string;
     quantity: number;
     unitPrice: number;
 }
