@@ -28,8 +28,8 @@ export default function Orders() {
   return (
     <section className="pt-30 container mx-auto flex gap-4">
       <Card className="w-12/12 rounded-md px-7">
-        {!orders
-          ? ""
+        {!orders || orders.length === 0
+          ? <h3>Você ainda não realizou nenhum pedido!</h3>
           : orders.map((order) => (
               <Card key={order.id} className="p-2 flex-row justify-between">
                 <div className="flex gap-4">
