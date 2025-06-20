@@ -24,6 +24,7 @@ model OrderItem {
   name       String
   orderId    String
   productId  String
+  imageUrl   String
   quantity   Int
   unitPrice  Decimal
   totalPrice Decimal
