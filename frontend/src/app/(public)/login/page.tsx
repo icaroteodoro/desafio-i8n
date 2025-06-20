@@ -14,9 +14,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/types/user-types";
 import { login } from "@/services/user-service";
 
-
-
-
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
@@ -28,23 +25,23 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  const [authError, setAuthError] = useState('');
+  const [authError, setAuthError] = useState("");
 
   const [visiblePass, setVisiblePass] = useState(false);
   const changeVisiblePass = () => {
     setVisiblePass(!visiblePass);
   };
-  
+
   const onSubmit = async (data: LoginFormData) => {
     try {
       return await login(data);
-    }catch(err) {
-      setAuthError('Usuário ou senha incorretos!');
+    } catch (err) {
+      setAuthError("Usuário ou senha incorretos!");
     }
   };
 
   return (
-    <section className="w-full h-screen flex items-center justify-center bg-zinc-100">
+    <section className="w-full h-screen flex flex-col items-center justify-center bg-zinc-100">
       <div className="bg-white w-80 rounded-md p-5">
         <form className="mb-5" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col mb-3">
@@ -63,7 +60,7 @@ export default function Login() {
             <div className="relative">
               <Input
                 id="password"
-                type={visiblePass ? 'text' : 'password'}
+                type={visiblePass ? "text" : "password"}
                 {...register("password")}
               />
               {errors.password && (
@@ -79,11 +76,7 @@ export default function Login() {
                 {visiblePass ? <EyeClosed /> : <Eye />}
               </Button>
             </div>
-            {authError && (
-                <p className="text-red-500 text-sm">
-                  {authError}
-                </p>
-              )}
+            {authError && <p className="text-red-500 text-sm">{authError}</p>}
           </div>
           <Button
             type="submit"
@@ -108,6 +101,10 @@ export default function Login() {
             Criar uma conta
           </Button>
         </Link>
+      </div>
+      <div className="mt-10 bg-white w-80 py-5 rounded-2xl text-center">
+        <h1><span className="font-bold">E-mail:</span> teste@teste.com</h1>
+        <h1><span className="font-bold">Senha:</span> teste123</h1>
       </div>
     </section>
   );
