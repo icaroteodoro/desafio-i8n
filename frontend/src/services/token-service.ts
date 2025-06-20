@@ -6,15 +6,26 @@ export function getToken(ctx = null) {
   return parseCookies(ctx).token;
 }
 
-export function getEmailFromToken(ctx?: any) {
+export function getEmailFromToken() {
   const token = getToken();
 
     if (!token) {
         return;
     }
 
-    const email = jwt.decode(token)?.sub;
+    const email = (jwt.decode(token) as any)?.email;
     return email;
+}
+
+export function getUserIdFromToken() {
+  const token = getToken();
+
+    if (!token) {
+        return;
+    }
+
+    const userId = (jwt.decode(token) as any)?.sub;
+    return userId;
 }
 
 export function saveToken(token: string, ctx = null) {
